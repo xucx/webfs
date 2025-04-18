@@ -33,7 +33,7 @@ type HTTPFileInfo struct {
 	ModTime  int64  `json:"mtime"`
 
 	//we return frontend config with
-	Welcome *config.Welcome `json:"welcome"`
+	Frontend *config.Frontend `json:"frontend"`
 
 	Dirs  []*HTTPFileInfo `json:"dirs"`
 	Files []*HTTPFileInfo `json:"files"`
@@ -188,12 +188,13 @@ func (s *Server) convertFileInfo(path string, fi fs.FileInfo) *HTTPFileInfo {
 		Dirs:     []*HTTPFileInfo{},
 		Files:    []*HTTPFileInfo{},
 
-		Welcome: config.C.Welcome,
+		Frontend: config.C.Frontend,
 	}
 
 	if info.IsDir {
 		if info.Path == "." { //Root dir
-			info.Name = "webfs"
+			info.Name = APP_NAME
+			info.FileName = APP_NAME
 			info.Path = ""
 		}
 	} else {

@@ -1,13 +1,12 @@
 import { Box, Stack, Typography } from '@mui/material';
 import { FileInfo, useFileInfo } from '../hooks';
-import { useState } from 'react';
+import { useEffect, useMemo, useState } from 'react';
 import { WelcomePage } from './welcomePage';
 import { DirPage } from './dirPage';
 import { FilePage } from './filePage';
-import { atom, useAtom } from 'jotai';
+import { atom, useAtom, useSetAtom } from 'jotai';
 import { Helmet } from 'react-helmet';
-
-const welcom$ = atom<boolean>(true);
+import { theme$, welcom$ } from '../App';
 
 export type PageContext = {
   path: string;
@@ -22,7 +21,7 @@ export const RootPage = () => {
   const { path, pathItems, parentPath, info, loading, error, refresh } =
     useFileInfo();
   const [showWelcom, setShowWelcom] = useAtom(welcom$);
-
+  const setTheme = useSetAtom(theme$);
   const ctx = {
     path,
     pathItems,
@@ -34,11 +33,22 @@ export const RootPage = () => {
     },
   } as PageContext;
 
+  useEffect(() => {
+    if (!info) return;
+    if (info.frontend?.theme) setTheme(info.frontend?.theme);
+  }, [info]);
+
   return (
     <>
+      {info?.frontend?.title && (
+        <Helmet>
+          <title>{info?.frontend?.title}</title>
+        </Helmet>
+      )}
+
       {info ? (
         <>
-          {path === '' && info.welcome?.enable && showWelcom ? (
+          {path === '' && !!info.frontend?.welcome && showWelcom ? (
             <WelcomePage ctx={ctx} />
           ) : info.isDir ? (
             <DirPage ctx={ctx} />

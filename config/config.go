@@ -8,18 +8,22 @@ import (
 )
 
 type Config struct {
-	LogLevel string   `yaml:"logLevel" json:"logLevel"`
-	Addr     string   `yaml:"addr" json:"addr"`
-	Port     int      `yaml:"port" json:"port"`
-	Dir      string   `yaml:"dir" json:"dir"`
-	Users    []string `yaml:"users" json:"users"`
-	BasePath string   `yaml:"basePath" json:"basePath"`
-	Welcome  *Welcome `yaml:"welcome" json:"welcome"`
+	LogLevel string    `yaml:"logLevel" json:"logLevel"`
+	Addr     string    `yaml:"addr" json:"addr"`
+	Port     int       `yaml:"port" json:"port"`
+	Dir      string    `yaml:"dir" json:"dir"`
+	Users    []string  `yaml:"users" json:"users"`
+	BasePath string    `yaml:"basePath" json:"basePath"`
+	Frontend *Frontend `yaml:"frontend" json:"frontend"`
+}
+
+type Frontend struct {
+	Title   string   `yaml:"title" json:"title"`
+	Theme   string   `yaml:"theme" json:"theme"`
+	Welcome *Welcome `yaml:"welcome" json:"welcome"`
 }
 
 type Welcome struct {
-	Enable              bool   `yaml:"enable" json:"enable"`
-	Header              string `yaml:"header" json:"header"`
 	BackgroundImageFile string `yaml:"backgroundImageFile" json:"backgroundImageFile"`
 	AvatarImageFile     string `yaml:"avatarImageFile" json:"avatarImageFile"`
 	Title               string `yaml:"title" json:"title"`

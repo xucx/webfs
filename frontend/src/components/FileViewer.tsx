@@ -35,7 +35,7 @@ export const FileViewerContainer = ({
   deActive?: boolean;
   onClose?: () => void;
 }>) => {
-  const [showInfo, setShowInfo] = useState<boolean>(true);
+  const [showInfo, setShowInfo] = useState<boolean>(false);
   const [desc, setDesc] = useState<string>('');
 
   useEffect(() => {

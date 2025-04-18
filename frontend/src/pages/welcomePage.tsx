@@ -8,24 +8,14 @@ import {
 } from '@mui/material';
 import { PageContext } from './rootPage';
 import { getFileTransUrl } from '../utils';
-import { Helmet } from 'react-helmet';
 import { API_PREFIX_FS } from '../constans';
 
 export const WelcomePage = ({ ctx }: { ctx: PageContext }) => {
   const theme = useTheme();
-  const welcome = ctx.fi.welcome;
+  const welcome = ctx.fi.frontend?.welcome;
 
   return (
     <>
-      <Helmet>
-        <title>
-          {!!welcome?.header
-            ? welcome?.header
-            : welcome.title
-            ? welcome.title
-            : 'webfs'}
-        </title>
-      </Helmet>
       <Stack
         alignItems="center"
         sx={{

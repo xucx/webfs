@@ -15,7 +15,7 @@ export interface FileInfo {
   dirs: FileInfo[];
   files: FileInfo[];
 
-  welcome: any;
+  frontend: any;
 
   //addation
   url: string;

@@ -110,7 +110,6 @@ export const FileList = ({
     if (onGoBack) onGoBack();
   };
 
-  console.log(fileInfo);
   return (
     <Stack>
       {manage && (
